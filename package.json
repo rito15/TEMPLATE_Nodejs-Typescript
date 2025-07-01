@@ -1,0 +1,20 @@
+{
+  "name": "template-nodejs-typescript",
+  "version": "0.0.1",
+  "description": "Template",
+  "main": "dist/app.js",
+  "scripts": {
+    "run": "ts-node src/app.ts",
+    "check": "tsc --noEmit",
+    "keep-check": "tsc --noEmit --watch",
+    "build": "tsc",
+    "run-output": "node dist/app.js"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/node": "^24.0.8",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
