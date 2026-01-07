@@ -1,3 +1,3 @@
 # Template: Nodejs + Typescript
 
-Starting Point
+- Starting Point: CommonJS
