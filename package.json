@@ -7,21 +7,38 @@
     "──[ Run ]──────────────────────────────": "",
     "run": "tsx src/app.ts",
     "run-dist": "node dist/app.js",
-    "run-esbuild": "node esbuild/app.mjs",
+    "run-esbuild": "node esbuild/app.cjs",
+
     "──[ Watch ]──────────────────────────────": "",
     "watch:local": "set PROFILE=local&& nodemon --watch src -e ts --watch .env --watch .env.local --exec tsx src/app.ts",
+
     "──[ Build ]──────────────────────────────": "",
-    "build": "tsc",
-    "build-esbuild": "esbuild src/app.ts --bundle --platform=node --outfile=esbuild/app.mjs",
+    "build": "rimraf dist && tsc && tsc-alias --resolve-full-paths",
+    "build-esbuild": "rimraf esbuild && esbuild src/app.cts --bundle --platform=node  --format=cjs --outfile=esbuild/app.cjs",
+    "clear-builds": "rimraf dist esbuild",
+
     "──[ Check ]──────────────────────────────": "",
     "check": "tsc --noEmit",
     "keep-check": "tsc --noEmit --watch",
+
     "──[ Install ]──────────────────────────────": "",
     "init": "npm install",
     "re-install": "rimraf node_modules && npm install",
     "install:deploy": "npm install --omit=dev --loglevel error",
+
     "───────────────────────────────────────────": "",
     "": ""
+  },
+  "notes":{
+    "Esbuild 주의사항": [
+      "Esbuild를 ESM으로 빌드 시 CJS 패키지들과 충돌이 발생할 수 있으므로 CJS로 빌드하도록 별도 파일(src/app.cts) 작성함",
+      "따라서 Esbuild 빌드 결과물은 CJS 형식임에 유의"
+    ],
+    "ESM 주의사항 및 해결": [
+      "기본적으로 프로젝트는 ESM 형식임",
+      "ESM에서는 ts 파일을 import할 때 확장자를 반드시 .js로 명시해야 함 (예: import { X } from './file.js')",
+      "하지만 너무 번거로우므로 tsc-alias 패키지를 사용하여 빌드 시 확장자 문제를 해결함"
+    ]
   },
   "keywords": [],
   "devDependencies": {
@@ -29,7 +46,11 @@
     "esbuild": "^0.27.2",
     "nodemon": "^3.1.10",
     "rimraf": "^6.1.2",
+    "tsc-alias": "^1.8.16",
     "tsx": "^4.21.0",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
   }
 }

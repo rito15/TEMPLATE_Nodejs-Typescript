@@ -1,6 +1,11 @@
+import { TestUtil } from "./util/test.util";
 
-function app() {
+export function app() {
     console.log("Success");
+    TestUtil();
 }
 
-app();
+// ESM
+if (import.meta.url?.endsWith(process.argv[1].replace(/\\/g, '/'))) {
+    app();
+}
