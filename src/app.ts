@@ -1,3 +1,3 @@
 export function app(){
-    console.log("start");
+    console.log(`app started (Profile: [${process.env.PROFILE}])`);
 }

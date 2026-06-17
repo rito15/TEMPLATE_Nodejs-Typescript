@@ -3,13 +3,17 @@
   "version": "0.0.1",
   "description": "Template",
   "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "──[ Run ]──────────────────────────────": "",
     "run": "tsx src/entries/main.ts",
     "run-dist": "node dist/entries/main.js",
     "run-esbuild": "node esbuild/app.cjs",
     "──[ Watch ]──────────────────────────────": "",
-    "watch:local": "set PROFILE=local&& nodemon --watch src -e ts --watch .env --watch .env.local --exec tsx src/entries/main.ts",
+    "watch:local": "cross-env PROFILE=local nodemon --watch src -e ts --watch .env --watch .env.local --exec tsx src/entries/main.ts",
     "──[ Build ]──────────────────────────────": "",
     "build": "rimraf dist && tsc && tsc-alias --resolve-full-paths",
     "build-esbuild": "rimraf esbuild && esbuild src/entries/main.bundle.cts --bundle --platform=node --format=cjs --outfile=esbuild/app.cjs",
@@ -42,15 +46,16 @@
   },
   "keywords": [],
   "devDependencies": {
-    "@types/node": "^25.9.3",
+    "@types/node": "^22.19.21",
+    "cross-env": "^10.1.0",
     "esbuild": "^0.28.1",
     "nodemon": "^3.1.14",
     "rimraf": "^6.1.2",
     "tsc-alias": "^1.8.16",
-    "tsx": "^4.22.4"
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "dotenv": "^17.2.3",
-    "typescript": "^6.0.3"
+    "dotenv": "^17.2.3"
   }
 }
