@@ -3,15 +3,14 @@
     /* Basic Options */
     "target": "ESNext",                       // ECMAScript 타겟 버전 지정: 'ES3' (기본값), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 또는 'ESNEXT'
     "module": "ESNext",                       // 모듈 코드 생성 방식 지정: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', 또는 'ESNext'
-    "lib": ["ES2021"],                        // 컴파일에 포함될 라이브러리 파일 지정
+    "lib": ["ES2023"],                        // 컴파일에 포함될 라이브러리 파일 지정 (target과 맞춰 최신 런타임 API 타입 제공)
     "allowJs": true,                          // JavaScript 파일의 컴파일 허용
     "inlineSourceMap": true,                  // 추가: 디버깅 편의를 위해 소스맵을 인라인으로 포함(js에서 에러 발생 시 원본 ts 파일 라인 표시)
     "outDir": "dist",                         // 출력 구조를 지정된 디렉토리로 리다이렉트
     "rootDir": "src",                         // 추가: 소스 루트 명시
 
     /* Strict Type-Checking Options */
-    "strict": true,                           // 모든 엄격한 타입 검사 옵션 활성화
-    "noImplicitAny": true,                    // 암시적 'any' 타입이 있는 표현식 및 선언에 대해 오류 발생
+    "strict": true,                           // 모든 엄격한 타입 검사 옵션 활성화 (noImplicitAny 등 포함)
 
     /* Module Resolution Options */
     "moduleResolution": "bundler",            // 모듈 해석 전략 지정
@@ -24,13 +23,14 @@
                                               // - moduleResolution: bundler에서는 @types 자동 포함이 안 되므로 명시 필요
     // "baseUrl": ".",                        // ! TS 6.0부터 deprecated (TS 7.0에서 제거) → 제거함
     // "paths"                                // ! 사용 시 baseUrl 없이도 tsconfig 기준 상대경로로 동작
-    "allowSyntheticDefaultImports": true,     // 기본 내보내기가 없는 모듈에서 기본 가져오기 허용. 코드 생성에는 영향을 주지 않고 타입 검사만 수행
-    "esModuleInterop": true,                  // 모든 가져오기에 대한 네임스페이스 객체 생성을 통해 CommonJS와 ES 모듈 간의 상호 운용성 활성화. 'allowSyntheticDefaultImports'를 암시적으로 포함
+    "esModuleInterop": true,                  // CommonJS와 ES 모듈 간 상호 운용성 활성화 ('allowSyntheticDefaultImports' 암묵 포함)
+    "isolatedModules": true,                  // 파일 단위 트랜스파일러(tsx/esbuild) 호환 보장
+                                              // - 단독 변환이 불가능한 코드(타입 전용 재export, const enum 등)를 tsc가 사전 경고
 
-    /* Experimental Options */
-    "experimentalDecorators": true,           // ES7 데코레이터에 대한 실험적 지원 활성화
-    "emitDecoratorMetadata": true,            // 데코레이터에 대한 타입 메타데이터 방출을 위한 실험적 지원 활성화
+    /* Other Options */
     "skipLibCheck": true,                     // 선언 파일의 타입 검사 건너뛰기
+    // "experimentalDecorators": true,        // 레거시(stage-2) 데코레이터 - NestJS/TypeORM/typedi 등 사용 시에만 활성화
+    // "emitDecoratorMetadata": true,         // 위 옵션과 함께 사용 (런타임에 reflect-metadata 필요)
 
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true  // 동일한 파일에 대한 일관되지 않은 대소문자 참조 비활성화
