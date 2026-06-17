@@ -14,10 +14,16 @@
     "noImplicitAny": true,                    // 암시적 'any' 타입이 있는 표현식 및 선언에 대해 오류 발생
 
     /* Module Resolution Options */
-    "moduleResolution": "node",               // 모듈 해석 전략 지정: 'node' (Node.js) 또는 'classic' (TypeScript 1.6 이전)
-    "baseUrl": ".",                           // 절대 경로가 아닌 모듈 이름을 해석하기 위한 기본 디렉토리
+    "moduleResolution": "bundler",            // 모듈 해석 전략 지정
+                                              // - TS 6.0부터 'node'(node10)는 deprecated → 'bundler' 사용
+                                              // - 확장자 없는 상대 import(import {x} from './file') 허용
+                                              //   (실제 .js 확장자는 빌드 시 tsc-alias --resolve-full-paths가 부착)
     "resolveJsonModule": true,                // JSON 파일 import 허용
-    // "paths" // ! moduleResolution: node일 경우 불필요
+    "types": ["node"],                        // 전역 타입(@types/node) 명시적 포함
+                                              // - console/process/import.meta.url 등 Node 전역 제공
+                                              // - moduleResolution: bundler에서는 @types 자동 포함이 안 되므로 명시 필요
+    // "baseUrl": ".",                        // ! TS 6.0부터 deprecated (TS 7.0에서 제거) → 제거함
+    // "paths"                                // ! 사용 시 baseUrl 없이도 tsconfig 기준 상대경로로 동작
     "allowSyntheticDefaultImports": true,     // 기본 내보내기가 없는 모듈에서 기본 가져오기 허용. 코드 생성에는 영향을 주지 않고 타입 검사만 수행
     "esModuleInterop": true,                  // 모든 가져오기에 대한 네임스페이스 객체 생성을 통해 CommonJS와 ES 모듈 간의 상호 운용성 활성화. 'allowSyntheticDefaultImports'를 암시적으로 포함
 
