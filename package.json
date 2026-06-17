@@ -9,15 +9,15 @@
   },
   "scripts": {
     "──[ Run ]──────────────────────────────": "",
-    "run": "tsx src/entries/main.ts",
-    "run-dist": "node dist/entries/main.js",
+    "run": "tsx src/main.ts",
+    "run-dist": "node dist/main.js",
     "run-esbuild": "node esbuild/app.cjs",
     "──[ Watch ]──────────────────────────────": "",
-    "watch:local": "cross-env PROFILE=local nodemon --watch src -e ts --watch .env --watch .env.local --exec tsx src/entries/main.ts",
+    "watch:local": "cross-env PROFILE=local nodemon --watch src -e ts --watch .env --watch .env.local --exec tsx src/main.ts",
     "──[ Build ]──────────────────────────────": "",
     "build": "rimraf dist && tsc && tsc-alias --resolve-full-paths",
-    "build-esbuild": "rimraf esbuild && esbuild src/entries/main.bundle.cts --bundle --platform=node --format=cjs --outfile=esbuild/app.cjs",
-    "clear-builds": "rimraf dist esbuild",
+    "build-esbuild": "rimraf esbuild && esbuild src/main.bundle.cts --bundle --platform=node --format=cjs --outfile=esbuild/app.cjs",
+    "clean-builds": "rimraf dist esbuild",
     "──[ Check ]──────────────────────────────": "",
     "check": "tsc --noEmit",
     "keep-check": "tsc --noEmit --watch",
@@ -31,11 +31,11 @@
   "notes": {
     "진입점 파일 분리": [
       "프로그램적 진입점(main)들과 기능적 진입점(app)을 분리",
-      "ts 파일을 직접 실행할 때는 src/entries/main.ts를 진입점으로 사용",
-      "esbuild로 번들링할 때는 src/entries/main.bundle.cts를 진입점으로 사용"
+      "ts 파일을 직접 실행할 때는 src/main.ts를 진입점으로 사용",
+      "esbuild로 번들링할 때는 src/main.bundle.cts를 진입점으로 사용"
     ],
     "Esbuild 주의사항": [
-      "Esbuild를 ESM으로 빌드 시 CJS 패키지들과 충돌이 발생할 수 있으므로 CJS로 빌드하도록 별도 파일(src/entries/main.bundle.cts) 작성함",
+      "Esbuild를 ESM으로 빌드 시 CJS 패키지들과 충돌이 발생할 수 있으므로 CJS로 빌드하도록 별도 파일(src/main.bundle.cts) 작성함",
       "따라서 Esbuild 빌드 결과물은 CJS 형식임에 유의"
     ],
     "ESM 주의사항 및 해결": [
